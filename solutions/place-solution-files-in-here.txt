@@ -1,3 +1,6 @@
+
+1.ContainsDuplicate 
+In Java 
 class Solution {
     public boolean containsDuplicate(int[] nums) {
 
@@ -10,4 +13,62 @@ class Solution {
         }
         return false;
     } 
+}
+
+In C#
+public class Solution {
+    public bool ContainsDuplicate(int[] nums) {
+        HashSet<int> set = new HashSet<int>();
+        foreach(int num in nums){
+            if(set.Contains(num)){
+                return true;
+            }
+            set.Add(num);
+        }
+        return false;
+    }
+}
+
+
+2. Valid Anagram
+In Java
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+       if(s.length() != t.length()) return false;
+        int[] counts = new int[26];
+
+        for(int i = 0; i < s.length(); i++){
+        counts[s.charAt(i) -'a']++;
+        counts[t.charAt() - 'a']--;  
+    }
+
+    for(int count : counts){
+        if(count != 0) 
+        return false;
+    }
+
+    return true;
+    } 
+
+}
+
+In C#
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        if(s.Length != t.Length) return false;
+        int[] counts = new int[26];
+
+        for(int i = 0; i < s.Length; i++){
+        counts[s[i] -'a']++;
+        counts[t[i]-'a']--;  
+    }
+
+    foreach (int count in counts){
+        if(count != 0) 
+        return false;
+    }
+
+    return true;
+    }
 }
