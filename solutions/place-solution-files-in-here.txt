@@ -797,3 +797,131 @@ public class MinStack {
  * int param_3 = obj.Top();
  * int param_4 = obj.GetMin();
  */
+
+15. Evaluate Reverse Polish Notation
+In Java
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+         Stack<Integer> stack = new Stack<>();
+
+        for (String token : tokens) {
+            switch (token) {
+                case "+":
+                    stack.push(stack.pop() + stack.pop());
+                    break;
+
+                case "-":
+                    int b = stack.pop();
+                    int a = stack.pop();
+                    stack.push(a - b);
+                    break;
+
+                case "*":
+                    stack.push(stack.pop() * stack.pop());
+                    break;
+
+                case "/":
+                    b = stack.pop();
+                    a = stack.pop();
+                    stack.push(a / b); // truncates toward zero
+                    break;
+
+                default:
+                    stack.push(Integer.parseInt(token));
+            }
+        }
+
+        return stack.pop();
+    }
+}
+
+15. Evaluate Reverse Polish Notation
+In C#
+
+public class Solution {
+    public int EvalRPN(string[] tokens) {
+       Stack<int> stack = new Stack<int>();
+
+        foreach (string token in tokens) {
+            if (token == "+" || token == "-" || token == "*" || token == "/") {
+                int b = stack.Pop();
+                int a = stack.Pop();
+                int result = 0;
+
+                switch (token) {
+                    case "+": result = a + b; break;
+                    case "-": result = a - b; break;
+                    case "*": result = a * b; break;
+                    case "/": result = a / b; break; // integer division, truncates toward zero
+                }
+
+                stack.Push(result);
+            } else {
+                stack.Push(int.Parse(token));
+            }
+        }
+
+        return stack.Pop();
+    }
+}
+
+16. Generate Parenthesis
+
+In Java
+
+class Solution {
+    public List<String> generateParenthesis(int n) {
+      List<String> result = new ArrayList<>();
+        backtrack(result, "", 0, 0, n);
+        return result;
+    }
+
+    private void backtrack(List<String> result, String current, int open, int close, int max) {
+        // If the current string is of valid length, add to result
+        if (current.length() == max * 2) {
+            result.add(current);
+            return;
+        }
+
+        // Add '(' if we can still add more open parentheses
+        if (open < max) {
+            backtrack(result, current + "(", open + 1, close, max);
+        }
+
+        // Add ')' if it won’t lead to invalid expression
+        if (close < open) {
+            backtrack(result, current + ")", open, close + 1, max);
+        }  
+    }
+}
+
+16. Generate Parenthesis
+In C#
+
+public class Solution {
+    public IList<string> GenerateParenthesis(int n) {
+       List<string> result = new List<string>();
+        Backtrack(result, "", 0, 0, n);
+        return result;
+    }
+
+    private void Backtrack(List<string> result, string current, int open, int close, int max) {
+        if (current.Length == max * 2) {
+            result.Add(current);
+            return;
+        }
+
+        if (open < max) {
+            Backtrack(result, current + "(", open + 1, close, max);
+        }
+
+        if (close < open) {
+            Backtrack(result, current + ")", open, close + 1, max);
+        }
+    }
+}
+
+--------
+
+17
