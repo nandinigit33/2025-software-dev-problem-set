@@ -522,3 +522,137 @@ public class Solution {
 }
 -------------------------------------------
 
+11. 3Sum
+
+In Java class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+         List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums); // Step 1: Sort the array
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            // Skip duplicates for the first number
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            int target = -nums[i]; // target for twoSum
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            // Two-pointer approach
+            while (left < right) {
+                int sum = nums[left] + nums[right];
+
+                if (sum == target) {
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+
+                    // Skip duplicates for left and right
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+
+                    left++;
+                    right--;
+                } else if (sum < target) {
+                    left++; // Need a larger number
+                } else {
+                    right--; // Need a smaller number
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+11. In C#
+
+public class Solution {
+    public IList<IList<int>> ThreeSum(int[] nums) {
+        Array.Sort(nums);
+        var result = new List<IList<int>>();
+
+        for (int i = 0; i < nums.Length - 2; i++) {
+            // Skip duplicates for the first number
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            int left = i + 1;
+            int right = nums.Length - 1;
+            int target = -nums[i];
+
+            while (left < right) {
+                int sum = nums[left] + nums[right];
+
+                if (sum == target) {
+                    result.Add(new List<int> { nums[i], nums[left], nums[right] });
+
+                    // Skip duplicates for left and right
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+
+                    left++;
+                    right--;
+                } else if (sum < target) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+
+        return result;
+    }
+}
+------------
+
+12. Container with most water
+In Java 
+class Solution {
+    public int maxArea(int[] height) {
+         int left = 0;
+        int right = height.length - 1;
+        int maxArea = 0;
+
+        while (left < right) {
+            int h = Math.min(height[left], height[right]);
+            int w = right - left;
+            int area = h * w;
+            maxArea = Math.max(maxArea, area);
+
+            // Move the pointer pointing to the shorter line
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+}
+
+12. In C#
+
+public class Solution {
+    public int MaxArea(int[] height) {
+       int left = 0;
+        int right = height.Length - 1;
+        int maxArea = 0;
+
+        while (left < right) {
+            int h = Math.Min(height[left], height[right]);
+            int w = right - left;
+            int area = h * w;
+
+            maxArea = Math.Max(maxArea, area);
+
+            // Move the pointer pointing to the shorter line
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+}
+
+---------
